@@ -120,3 +120,29 @@ where title="Alone Trip")
 );
 --###############################################
 --7c
+select first_name, last_name, email
+from customer
+join address on address.address_id = customer.address_id
+where address.address_id in 
+(select city_id 
+from city
+join country on country.country_id = city.country_id
+where country.country_id in 
+(select country_id 
+from country
+where country = "Canada")
+);
+--################################################
+--7d
+select title 
+from film
+where film.film_id in 
+(select film_category.film_id
+from film_category
+join film on film_category.film_id = film.film_id
+where film_category.category_id in 
+(select category_id
+from category
+where name="Family")
+);
+--#################################################
